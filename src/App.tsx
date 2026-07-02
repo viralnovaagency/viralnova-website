@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState, useCallback, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import {
   Rocket, TrendingUp, Megaphone, PenTool, Users, BarChart3,
   Mail, Phone, MapPin, Instagram, MessageCircle, ArrowRight,
   Check, Star, Sparkles, Menu, X, Loader2, ChevronDown,
-  Play, Zap, Target, Award,
+  Play, Zap, Target, Award, Shield, Clock, LineChart,
+  Brain, Globe, Heart, Quote, ArrowUpRight,
 } from 'lucide-react';
 import { supabase } from './lib/supabase';
 
@@ -58,6 +59,7 @@ function Nav() {
   const links = [
     { label: 'Services', href: '#services' },
     { label: 'Portfolio', href: '#portfolio' },
+    { label: 'Why Us', href: '#why-us' },
     { label: 'Pricing', href: '#pricing' },
     { label: 'Testimonials', href: '#testimonials' },
     { label: 'FAQ', href: '#faq' },
@@ -65,31 +67,31 @@ function Nav() {
   ];
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? 'border-b border-white/10 bg-ink-900/85 backdrop-blur-xl' : 'bg-transparent'}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled ? 'glass-nav shadow-[0_8px_32px_-12px_rgba(0,0,0,0.5)]' : 'bg-transparent'}`}>
       <nav className="container-px flex h-16 items-center justify-between md:h-20">
-        <a href="#home" className="flex items-center gap-2.5 font-display text-xl font-extrabold tracking-tight">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-violet-500 shadow-glow">
+        <a href="#home" className="group flex items-center gap-2.5 font-display text-xl font-extrabold tracking-tight">
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-violet-500 to-violet-700 shadow-glow transition-transform duration-300 group-hover:scale-110">
             <Sparkles className="h-5 w-5 text-white" />
           </span>
           <span className="glow-text">ViralNova</span>
         </a>
-        <div className="hidden items-center gap-7 md:flex">
+        <div className="hidden items-center gap-7 lg:flex">
           {links.map((l) => (
             <a key={l.href} href={l.href} className="text-sm font-medium text-white/65 transition-colors hover:text-white">{l.label}</a>
           ))}
-          <a href="#contact" className="btn-primary !px-5 !py-2.5">Get Started <ArrowRight className="h-4 w-4" /></a>
+          <a href="#contact" className="btn-primary !px-5 !py-2.5">Book a Call <ArrowRight className="h-4 w-4" /></a>
         </div>
-        <button onClick={() => setOpen(v => !v)} className="grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/5 text-white md:hidden" aria-label="Toggle menu">
+        <button onClick={() => setOpen(v => !v)} className="grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/5 text-white lg:hidden" aria-label="Toggle menu">
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </nav>
       {open && (
-        <div className="border-t border-white/10 bg-ink-900/95 backdrop-blur-xl md:hidden">
+        <div className="border-t border-white/10 bg-ink-950/95 backdrop-blur-xl lg:hidden">
           <div className="container-px flex flex-col gap-1 py-4">
             {links.map((l) => (
               <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 text-sm font-medium text-white/80 transition-colors hover:bg-white/5 hover:text-white">{l.label}</a>
             ))}
-            <a href="#contact" onClick={() => setOpen(false)} className="btn-primary mt-2">Get Started <ArrowRight className="h-4 w-4" /></a>
+            <a href="#contact" onClick={() => setOpen(false)} className="btn-primary mt-2">Book a Free Strategy Call <ArrowRight className="h-4 w-4" /></a>
           </div>
         </div>
       )}
@@ -100,51 +102,79 @@ function Nav() {
 // ─── Hero ────────────────────────────────────────────────────────────────────
 function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden pt-32 pb-20 md:pt-44 md:pb-28">
-      <div className="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-40" />
-      <div className="pointer-events-none absolute -top-24 left-1/2 h-80 w-[44rem] -translate-x-1/2 rounded-full bg-violet-600/30 blur-[130px]" />
-      <div className="pointer-events-none absolute right-0 top-40 h-64 w-64 rounded-full bg-violet-500/20 blur-[100px]" />
-      <div className="pointer-events-none absolute -left-20 bottom-10 h-48 w-48 rounded-full bg-violet-700/20 blur-[80px]" />
+    <section id="home" className="relative flex min-h-screen items-center overflow-hidden pt-24 pb-16 md:pt-28">
+      <div className="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-30" />
+      <div className="pointer-events-none absolute -top-32 left-1/2 h-[36rem] w-[52rem] -translate-x-1/2 rounded-full bg-violet-600/25 blur-[140px] animate-orb" />
+      <div className="pointer-events-none absolute right-0 top-1/3 h-72 w-72 rounded-full bg-violet-500/15 blur-[120px]" />
+      <div className="pointer-events-none absolute -left-20 bottom-10 h-56 w-56 rounded-full bg-accent-500/10 blur-[100px]" />
 
-      <div className="container-px relative text-center">
-        <Reveal>
-          <span className="section-eyebrow"><Sparkles className="h-3.5 w-3.5" /> #1 Social Media Marketing Agency</span>
-        </Reveal>
-        <Reveal delay={80}>
-          <h1 className="mx-auto mt-6 max-w-4xl font-display text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-            Scale Your Brand.<br /><span className="text-gradient glow-text">Dominate Social Media.</span>
-          </h1>
-        </Reveal>
-        <Reveal delay={160}>
-          <p className="mx-auto mt-6 max-w-2xl text-base text-white/70 sm:text-lg md:text-xl">
-            ViralNova transforms brands into social media powerhouses. Scroll-stopping content, high-converting ads, and explosive growth — engineered for real results.
-          </p>
-        </Reveal>
-        <Reveal delay={240}>
-          <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a href="#contact" className="btn-primary w-full sm:w-auto">
-              Book a Free Strategy Call <ArrowRight className="h-4 w-4" />
-            </a>
-            <a href="#portfolio" className="btn-ghost w-full sm:w-auto">
-              <Play className="h-4 w-4" /> See Our Work
-            </a>
-          </div>
-        </Reveal>
-        <Reveal delay={340}>
-          <div className="mx-auto mt-14 grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-4">
-            {[
-              { value: '250+', label: 'Campaigns Launched' },
-              { value: '12M+', label: 'Reach Generated' },
-              { value: '4.8x', label: 'Avg. ROAS' },
-              { value: '98%', label: 'Client Retention' },
-            ].map((s) => (
-              <div key={s.label} className="card p-4 text-center">
-                <div className="font-display text-2xl font-extrabold text-white sm:text-3xl">{s.value}</div>
-                <div className="mt-1 text-xs text-white/60 sm:text-sm">{s.label}</div>
-              </div>
+      <div className="container-px relative">
+        <div className="mx-auto max-w-4xl text-center">
+          <Reveal>
+            <span className="section-eyebrow"><Sparkles className="h-3.5 w-3.5" /> AI-Powered Digital Marketing Agency</span>
+          </Reveal>
+          <Reveal delay={100}>
+            <h1 className="mt-7 font-display text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+              Scale Your Brand.<br />
+              <span className="text-gradient glow-text">Dominate Social Media.</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={200}>
+            <p className="mx-auto mt-7 max-w-2xl text-base text-white/70 sm:text-lg md:text-xl">
+              We help businesses grow with AI-powered content, high-converting websites, social media management, and performance marketing.
+            </p>
+          </Reveal>
+          <Reveal delay={300}>
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <a href="#contact" className="btn-primary w-full sm:w-auto">
+                Book a Free Strategy Call <ArrowRight className="h-4 w-4" />
+              </a>
+              <a href="#portfolio" className="btn-ghost w-full sm:w-auto">
+                <Play className="h-4 w-4" /> View Our Work
+              </a>
+            </div>
+          </Reveal>
+          <Reveal delay={400}>
+            <div className="mx-auto mt-16 grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-4">
+              {[
+                { value: '250+', label: 'Campaigns Launched' },
+                { value: '12M+', label: 'Reach Generated' },
+                { value: '4.8x', label: 'Avg. ROAS' },
+                { value: '98%', label: 'Client Retention' },
+              ].map((s) => (
+                <div key={s.label} className="glass-card p-4 text-center">
+                  <div className="font-display text-2xl font-extrabold text-white sm:text-3xl">{s.value}</div>
+                  <div className="mt-1 text-xs text-white/60 sm:text-sm">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <div className="flex h-10 w-6 items-start justify-center rounded-full border-2 border-white/20 p-1.5">
+          <div className="h-2 w-1 animate-bounce rounded-full bg-white/50" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Logo Marquee ─────────────────────────────────────────────────────────────
+const CLIENTS = ['BrewCraft', 'Lumen Skincare', 'FitFuel', 'NovaBites', 'PulseWear', 'ZenBot AI', 'Aura Labs', 'Verde Co'];
+function LogoMarquee() {
+  return (
+    <section className="border-y border-white/5 bg-ink-900/50 py-8">
+      <div className="container-px">
+        <p className="mb-6 text-center text-xs font-semibold uppercase tracking-[0.25em] text-white/40">Trusted by ambitious brands worldwide</p>
+        <div className="mask-fade-edges overflow-hidden">
+          <div className="flex w-max animate-marquee gap-12">
+            {[...CLIENTS, ...CLIENTS].map((c, i) => (
+              <span key={i} className="font-display text-xl font-bold text-white/30 transition-colors hover:text-white/60">{c}</span>
             ))}
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -152,12 +182,12 @@ function Hero() {
 
 // ─── Services ────────────────────────────────────────────────────────────────
 const SERVICES = [
-  { icon: PenTool,    title: 'Content Creation',     desc: 'Scroll-stopping reels, graphics, and copy crafted to capture attention and drive real engagement across every platform.' },
-  { icon: Megaphone,  title: 'Paid Advertising',      desc: 'Data-driven ad campaigns across Instagram, Facebook, and TikTok engineered for maximum ROAS and lead volume.' },
-  { icon: Users,      title: 'Community Management',  desc: 'We grow and nurture your audience 24/7, turning casual followers into loyal brand advocates and repeat customers.' },
-  { icon: TrendingUp, title: 'Growth Strategy',       desc: 'Custom roadmaps that align content, paid media, and analytics to scale your brand predictably month over month.' },
-  { icon: BarChart3,  title: 'Analytics & Reporting', desc: 'Crystal-clear dashboards showing exactly what\'s working, what\'s not, and where your next growth opportunity is hiding.' },
-  { icon: Rocket,     title: 'Influencer Marketing',  desc: 'Strategic creator partnerships that put your brand in front of the right audiences and drive authentic conversions.' },
+  { icon: Brain,      title: 'AI-Powered Content',     desc: 'AI-driven content strategy, copywriting, and creative production that scales your output without sacrificing quality.' },
+  { icon: Globe,      title: 'High-Converting Websites', desc: 'Lightning-fast, conversion-optimized websites engineered to turn visitors into paying customers.' },
+  { icon: Users,      title: 'Social Media Management',  desc: 'Full-service management across Instagram, TikTok, LinkedIn, and YouTube — content to community.' },
+  { icon: Megaphone,  title: 'Performance Marketing',    desc: 'Data-driven paid ad campaigns across Meta, Google, and TikTok engineered for maximum ROAS.' },
+  { icon: PenTool,    title: 'Brand & Creative',         desc: 'Scroll-stopping visual identity, motion graphics, and creative that makes your brand unmissable.' },
+  { icon: BarChart3,  title: 'Analytics & Reporting',    desc: 'Real-time dashboards and transparent reporting so you always know exactly what is driving results.' },
 ];
 
 function Services() {
@@ -168,21 +198,24 @@ function Services() {
           <div className="mx-auto max-w-2xl text-center">
             <span className="section-eyebrow">What We Do</span>
             <h2 className="mt-5 font-display text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
-              Everything you need to <span className="text-gradient">go viral</span>
+              Everything you need to <span className="text-gradient">scale online</span>
             </h2>
-            <p className="mt-4 text-white/70">A full-stack social media growth engine — from first idea to measurable, explosive impact.</p>
+            <p className="mt-4 text-white/70">A full-stack digital growth engine — from AI content to performance ads, all under one roof.</p>
           </div>
         </Reveal>
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
             <Reveal key={s.title} delay={i * 70}>
-              <div className="card group h-full p-6">
+              <div className="card group h-full p-7">
                 <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-violet-500/10 blur-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                <div className="relative grid h-12 w-12 place-items-center rounded-xl bg-violet-500/15 text-violet-300 ring-1 ring-violet-400/30 transition-all duration-300 group-hover:bg-violet-500 group-hover:text-white group-hover:shadow-glow">
-                  <s.icon className="h-6 w-6" />
+                <div className="relative grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-violet-500/20 to-violet-700/10 text-violet-300 ring-1 ring-violet-400/30 transition-all duration-300 group-hover:from-violet-500 group-hover:to-violet-600 group-hover:text-white group-hover:shadow-glow">
+                  <s.icon className="h-7 w-7" />
                 </div>
                 <h3 className="mt-5 font-display text-xl font-bold">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/65">{s.desc}</p>
+                <p className="mt-2.5 text-sm leading-relaxed text-white/65">{s.desc}</p>
+                <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-violet-300 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  Learn more <ArrowRight className="h-4 w-4" />
+                </div>
               </div>
             </Reveal>
           ))}
@@ -192,99 +225,11 @@ function Services() {
   );
 }
 
-// ─── Before / After Slider ───────────────────────────────────────────────────
-function BeforeAfterSlider() {
-  const [pos, setPos] = useState(50);
-  const dragging = useRef(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const updatePos = useCallback((clientX: number) => {
-    const el = containerRef.current;
-    if (!el) return;
-    const { left, width } = el.getBoundingClientRect();
-    const pct = Math.min(100, Math.max(0, ((clientX - left) / width) * 100));
-    setPos(pct);
-  }, []);
-
-  const onMouseDown = () => { dragging.current = true; };
-  const onMouseMove = (e: React.MouseEvent) => { if (dragging.current) updatePos(e.clientX); };
-  const onMouseUp = () => { dragging.current = false; };
-  const onTouchMove = (e: React.TouchEvent) => { updatePos(e.touches[0].clientX); };
-
-  const beforeImg = 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800';
-  const afterImg  = 'https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=800';
-
-  return (
-    <section className="relative py-20 md:py-28">
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-[50rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-700/15 blur-[120px]" />
-      <div className="container-px relative">
-        <Reveal>
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="section-eyebrow">Transformation</span>
-            <h2 className="mt-5 font-display text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
-              The ViralNova <span className="text-gradient">difference</span>
-            </h2>
-            <p className="mt-4 text-white/70">Drag the slider to see how we transform brands before and after working with us.</p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={120}>
-          <div
-            ref={containerRef}
-            className="relative mx-auto mt-12 max-w-3xl cursor-ew-resize select-none overflow-hidden rounded-2xl border border-white/10 shadow-glow"
-            style={{ aspectRatio: '16/9' }}
-            onMouseDown={onMouseDown}
-            onMouseMove={onMouseMove}
-            onMouseUp={onMouseUp}
-            onMouseLeave={onMouseUp}
-            onTouchMove={onTouchMove}
-          >
-            <img src={afterImg} alt="After ViralNova" className="absolute inset-0 h-full w-full object-cover" draggable={false} />
-
-            <div className="absolute inset-0 overflow-hidden" style={{ width: `${pos}%` }}>
-              <img src={beforeImg} alt="Before ViralNova" className="h-full w-full object-cover" style={{ width: `${10000 / pos}%` }} draggable={false} />
-            </div>
-
-            <div className="absolute inset-y-0 z-10" style={{ left: `${pos}%`, transform: 'translateX(-50%)' }}>
-              <div className="h-full w-0.5 bg-white/80" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full border-2 border-white bg-violet-500 shadow-glow">
-                <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 9l-4 3 4 3M16 9l4 3-4 3" />
-                </svg>
-              </div>
-            </div>
-
-            <div className="absolute bottom-4 left-4 z-10 rounded-full bg-black/70 px-3 py-1 text-xs font-semibold text-white/90 backdrop-blur">Before</div>
-            <div className="absolute bottom-4 right-4 z-10 rounded-full bg-violet-500/90 px-3 py-1 text-xs font-semibold text-white backdrop-blur shadow-glow-sm">After ViralNova</div>
-          </div>
-        </Reveal>
-
-        <Reveal delay={200}>
-          <div className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-4">
-            {[
-              { icon: TrendingUp, value: '+340%', label: 'Avg. Follower Growth' },
-              { icon: Zap,        value: '+220%', label: 'Engagement Rate'      },
-              { icon: Target,     value: '4.8x',  label: 'ROAS'                 },
-              { icon: Award,      value: '98%',   label: 'Client Satisfaction'  },
-            ].map((s) => (
-              <div key={s.label} className="card p-5 text-center">
-                <s.icon className="mx-auto h-6 w-6 text-violet-300" />
-                <div className="mt-3 font-display text-2xl font-extrabold">{s.value}</div>
-                <div className="mt-1 text-xs text-white/60">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
 // ─── Portfolio ───────────────────────────────────────────────────────────────
 const PORTFOLIO = [
   { img: 'https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=600', client: 'BrewCraft', result: '+840% Instagram reach in 90 days', tag: 'Content + Ads' },
-  { img: 'https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=600', client: 'Lumen Skincare', result: 'ROAS went from 1.9x → 5.2x', tag: 'Paid Ads' },
-  { img: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600', client: 'FitFuel', result: '2K → 45K followers in 5 months', tag: 'Growth Strategy' },
+  { img: 'https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=600', client: 'Lumen Skincare', result: 'ROAS went from 1.9x to 5.2x', tag: 'Paid Ads' },
+  { img: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600', client: 'FitFuel', result: '2K to 45K followers in 5 months', tag: 'Growth Strategy' },
   { img: 'https://images.pexels.com/photos/6177645/pexels-photo-6177645.jpeg?auto=compress&cs=tinysrgb&w=600', client: 'NovaBites', result: '3.1M impressions first campaign', tag: 'Influencer + Content' },
   { img: 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=600', client: 'PulseWear', result: '60% lower CPL via A/B testing', tag: 'Paid Ads' },
   { img: 'https://images.pexels.com/photos/3182781/pexels-photo-3182781.jpeg?auto=compress&cs=tinysrgb&w=600', client: 'ZenBot AI', result: '10K subscribers in 30 days', tag: 'Community Growth' },
@@ -293,7 +238,8 @@ const PORTFOLIO = [
 function Portfolio() {
   return (
     <section id="portfolio" className="relative py-20 md:py-28">
-      <div className="container-px">
+      <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-[44rem] -translate-x-1/2 rounded-full bg-violet-600/10 blur-[120px]" />
+      <div className="container-px relative">
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
             <span className="section-eyebrow">Our Work</span>
@@ -308,19 +254,24 @@ function Portfolio() {
           {PORTFOLIO.map((p, i) => (
             <Reveal key={p.client} delay={i * 60}>
               <div className="card group overflow-hidden">
-                <div className="relative h-48 overflow-hidden sm:h-52">
+                <div className="relative h-52 overflow-hidden">
                   <img
                     src={p.img}
                     alt={p.client}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink-900/90 via-ink-900/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/30 to-transparent" />
                   <span className="absolute right-3 top-3 rounded-full bg-violet-500/90 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur shadow-glow-sm">{p.tag}</span>
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                    <h3 className="font-display text-lg font-bold text-white">{p.client}</h3>
+                    <span className="grid h-8 w-8 place-items-center rounded-full bg-white/10 text-white opacity-0 backdrop-blur transition-all duration-300 group-hover:opacity-100">
+                      <ArrowUpRight className="h-4 w-4" />
+                    </span>
+                  </div>
                 </div>
                 <div className="p-5">
-                  <h3 className="font-display text-lg font-bold">{p.client}</h3>
-                  <p className="mt-1 flex items-center gap-2 text-sm text-violet-300">
+                  <p className="flex items-center gap-2 text-sm text-violet-300">
                     <TrendingUp className="h-4 w-4 shrink-0" /> {p.result}
                   </p>
                 </div>
@@ -341,9 +292,69 @@ function Portfolio() {
   );
 }
 
+// ─── Why Choose ViralNova ────────────────────────────────────────────────────
+const WHY_US = [
+  { icon: Brain,     title: 'AI-First Approach',     desc: 'We leverage AI tools for content ideation, A/B testing, and optimization — giving you an unfair advantage.' },
+  { icon: LineChart, title: 'Data-Driven Decisions',  desc: 'Every recommendation is backed by data. No guesswork, no vanity metrics — just measurable growth.' },
+  { icon: Shield,     title: 'Transparent Reporting',  desc: 'Real-time dashboards and weekly reports. You always know exactly where your budget goes and what it delivers.' },
+  { icon: Clock,      title: 'Fast Turnaround',         desc: 'Content delivered on schedule, campaigns launched in days not weeks. We move at the speed of your ambition.' },
+  { icon: Award,      title: 'Proven Track Record',     desc: '250+ campaigns, 12M+ reach generated, 4.8x average ROAS. Our results speak louder than any pitch.' },
+  { icon: Heart,      title: 'Genuine Partnership',     desc: 'We treat your brand like our own. Your goals are our goals, and we are invested in your long-term success.' },
+];
+
+function WhyChooseUs() {
+  return (
+    <section id="why-us" className="relative py-20 md:py-28">
+      <div className="pointer-events-none absolute inset-0 bg-dots opacity-30" />
+      <div className="container-px relative">
+        <Reveal>
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="section-eyebrow">Why ViralNova</span>
+            <h2 className="mt-5 font-display text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
+              The agency that <span className="text-gradient">actually delivers</span>
+            </h2>
+            <p className="mt-4 text-white/70">We are not just another agency. We are your growth partner — obsessed with results, transparency, and speed.</p>
+          </div>
+        </Reveal>
+
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {WHY_US.map((w, i) => (
+            <Reveal key={w.title} delay={i * 70}>
+              <div className="glass-card group h-full p-7 transition-all duration-300 hover:border-violet-400/40 hover:bg-violet-500/5">
+                <div className="grid h-12 w-12 place-items-center rounded-xl bg-violet-500/15 text-violet-300 ring-1 ring-violet-400/30 transition-all duration-300 group-hover:bg-violet-500 group-hover:text-white group-hover:shadow-glow">
+                  <w.icon className="h-6 w-6" />
+                </div>
+                <h3 className="mt-5 font-display text-lg font-bold">{w.title}</h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-white/65">{w.desc}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={100}>
+          <div className="mt-14 grid max-w-4xl grid-cols-2 gap-6 sm:grid-cols-4">
+            {[
+              { icon: TrendingUp, value: '+340%', label: 'Avg. Follower Growth' },
+              { icon: Zap,        value: '+220%', label: 'Engagement Rate'      },
+              { icon: Target,     value: '4.8x',  label: 'Average ROAS'         },
+              { icon: Award,      value: '98%',   label: 'Client Satisfaction'  },
+            ].map((s) => (
+              <div key={s.label} className="text-center">
+                <s.icon className="mx-auto h-7 w-7 text-violet-300" />
+                <div className="mt-3 font-display text-3xl font-extrabold">{s.value}</div>
+                <div className="mt-1 text-xs text-white/55">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 // ─── Testimonials ────────────────────────────────────────────────────────────
 const TESTIMONIALS = [
-  { name: 'Aarav Sharma',  role: 'Founder, BrewCraft',          quote: 'ViralNova took our Instagram from 2K to 45K followers in five months. The reels they produce actually convert — our DMs have never been busier.' },
+  { name: 'Aarav Sharma',  role: 'Founder, BrewCraft',          quote: 'ViralNova took our Instagram from 2K to 45K followers in five months. The AI-powered content strategy was a game changer — our DMs have never been busier.' },
   { name: 'Priya Nair',    role: 'Marketing Lead, Lumen Skincare', quote: 'Our ROAS jumped from 1.9x to 5.2x within two months. Transparent reporting and genuinely creative work that makes us proud.' },
   { name: 'Rahul Verma',   role: 'CEO, FitFuel',                 quote: 'The team treats our brand like their own. Strategy, content, ads — everything is dialed in. Best agency partnership we have ever had.' },
   { name: 'Sneha Kapoor',  role: 'Co-founder, NovaBites',        quote: '3.1 million impressions on our very first campaign. The influencer strategy ViralNova built for us was pure gold.' },
@@ -367,13 +378,14 @@ function Testimonials() {
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {TESTIMONIALS.map((t, i) => (
             <Reveal key={t.name} delay={i * 60}>
-              <figure className="card h-full p-6">
-                <div className="flex gap-1 text-violet-300">
+              <figure className="card h-full p-7">
+                <Quote className="h-8 w-8 text-violet-400/30" />
+                <blockquote className="mt-4 text-sm leading-relaxed text-white/80">{t.quote}</blockquote>
+                <div className="mt-5 flex gap-1 text-violet-300">
                   {Array.from({ length: 5 }).map((_, k) => <Star key={k} className="h-4 w-4 fill-current" />)}
                 </div>
-                <blockquote className="mt-4 text-sm leading-relaxed text-white/80">"{t.quote}"</blockquote>
-                <figcaption className="mt-5 flex items-center gap-3">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-violet-500/20 font-display font-bold text-violet-200 ring-1 ring-violet-400/30">
+                <figcaption className="mt-5 flex items-center gap-3 border-t border-white/10 pt-5">
+                  <span className="grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-violet-500/20 to-violet-700/10 font-display font-bold text-violet-200 ring-1 ring-violet-400/30">
                     {t.name.charAt(0)}
                   </span>
                   <div>
@@ -394,7 +406,7 @@ function Testimonials() {
 const PLANS = [
   {
     name: 'Starter',
-    price: '₹15,000',
+    price: '15,000',
     period: '/mo',
     desc: 'Perfect for small brands ready to establish their social presence.',
     features: [
@@ -409,13 +421,13 @@ const PLANS = [
   },
   {
     name: 'Growth',
-    price: '₹35,000',
+    price: '35,000',
     period: '/mo',
     desc: 'For brands serious about scaling fast with paid ads and premium content.',
     features: [
       '4 Platforms managed',
       '30 posts + 8 reels/month',
-      'Paid ad management (up to ₹50K spend)',
+      'Paid ad management (up to 50K spend)',
       'Custom brand strategy',
       'Weekly analytics + calls',
       'Priority WhatsApp support',
@@ -425,7 +437,7 @@ const PLANS = [
   },
   {
     name: 'Dominator',
-    price: '₹75,000',
+    price: '75,000',
     period: '/mo',
     desc: 'Full-service growth engine for brands ready to dominate their market.',
     features: [
@@ -460,15 +472,15 @@ function Pricing() {
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {PLANS.map((plan, i) => (
             <Reveal key={plan.name} delay={i * 80}>
-              <div className={`card flex h-full flex-col p-7 ${plan.highlight ? 'border-violet-400/60 shadow-glow ring-1 ring-violet-400/40' : ''}`}>
+              <div className={`card flex h-full flex-col p-7 ${plan.highlight ? 'shimmer-border border-violet-400/60 shadow-glow ring-1 ring-violet-400/40' : ''}`}>
                 {plan.highlight && (
-                  <div className="mb-4 inline-flex self-start rounded-full bg-violet-500 px-3 py-1 text-xs font-bold text-white shadow-glow-sm">
+                  <div className="mb-4 inline-flex self-start rounded-full bg-gradient-to-r from-violet-500 to-violet-600 px-3 py-1 text-xs font-bold text-white shadow-glow-sm">
                     Most Popular
                   </div>
                 )}
                 <h3 className="font-display text-2xl font-extrabold">{plan.name}</h3>
                 <div className="mt-3 flex items-end gap-1">
-                  <span className="font-display text-4xl font-extrabold">{plan.price}</span>
+                  <span className="font-display text-4xl font-extrabold">&#8377;{plan.price}</span>
                   <span className="mb-1 text-white/60">{plan.period}</span>
                 </div>
                 <p className="mt-3 text-sm text-white/65">{plan.desc}</p>
@@ -503,13 +515,13 @@ function Pricing() {
 
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 const FAQS = [
-  { q: 'What makes ViralNova different from other agencies?', a: 'We combine creative storytelling with data-driven strategy. Every campaign is custom-built for your brand — no templates, no cookie-cutter approaches. We obsess over your results as much as you do.' },
-  { q: 'How quickly will I see results?', a: 'Most clients see measurable improvement in engagement and reach within the first 30 days. Significant follower growth and ROAS improvements typically show within 60–90 days of full campaign execution.' },
+  { q: 'What makes ViralNova different from other agencies?', a: 'We combine AI-powered tools with creative storytelling and data-driven strategy. Every campaign is custom-built for your brand — no templates, no cookie-cutter approaches. We obsess over your results as much as you do.' },
+  { q: 'How quickly will I see results?', a: 'Most clients see measurable improvement in engagement and reach within the first 30 days. Significant follower growth and ROAS improvements typically show within 60 to 90 days of full campaign execution.' },
   { q: 'Which platforms do you manage?', a: 'We specialise in Instagram, Facebook, TikTok, YouTube Shorts, and LinkedIn. We recommend the best platforms based on your target audience and business goals.' },
   { q: 'Do you create the content or do I?', a: 'We handle everything end-to-end — ideation, scripting, design, production (where possible), captions, and scheduling. You just approve the content before it goes live.' },
   { q: 'Is there a minimum contract length?', a: 'No long-term contracts. We work on a monthly rolling basis because we believe our results should be the reason you stay, not a contract.' },
   { q: 'What is included in paid ad management?', a: 'We handle campaign setup, audience targeting, creative production, A/B testing, budget optimisation, and weekly reporting. We treat your ad budget like our own money.' },
-  { q: 'How do I get started?', a: 'Simply book a free 30-minute strategy call via the contact form or WhatsApp. We\'ll audit your current presence, understand your goals, and present a custom plan — at no cost.' },
+  { q: 'How do I get started?', a: 'Simply book a free 30-minute strategy call via the contact form or WhatsApp. We will audit your current presence, understand your goals, and present a custom plan — at no cost.' },
 ];
 
 function FAQ() {
@@ -521,7 +533,7 @@ function FAQ() {
           <div className="mx-auto max-w-2xl text-center">
             <span className="section-eyebrow">FAQ</span>
             <h2 className="mt-5 font-display text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
-              Got questions? <span className="text-gradient">We've got answers.</span>
+              Got questions? <span className="text-gradient">We have got answers.</span>
             </h2>
           </div>
         </Reveal>
@@ -558,7 +570,7 @@ function CTA() {
       <div className="container-px">
         <Reveal>
           <div className="relative overflow-hidden rounded-3xl border border-violet-400/30 bg-gradient-to-br from-violet-700/30 via-ink-800 to-ink-900 p-8 text-center shadow-glow-lg md:p-16">
-            <div className="pointer-events-none absolute -top-20 left-1/2 h-60 w-96 -translate-x-1/2 rounded-full bg-violet-500/30 blur-[100px]" />
+            <div className="pointer-events-none absolute -top-20 left-1/2 h-60 w-96 -translate-x-1/2 rounded-full bg-violet-500/30 blur-[100px] animate-orb" />
             <div className="pointer-events-none absolute bottom-0 right-0 h-48 w-48 rounded-full bg-violet-600/20 blur-[80px]" />
             <div className="relative">
               <h2 className="mx-auto max-w-2xl font-display text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
@@ -608,7 +620,7 @@ function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="card flex flex-col items-center justify-center p-10 text-center">
+      <div className="glass-card flex flex-col items-center justify-center p-10 text-center">
         <span className="grid h-14 w-14 place-items-center rounded-full bg-violet-500/20 text-violet-300 ring-1 ring-violet-400/40 shadow-glow">
           <Check className="h-7 w-7" />
         </span>
@@ -622,7 +634,7 @@ function ContactForm() {
   const inputCls = 'w-full rounded-xl border border-white/10 bg-ink-700/60 px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-all duration-200 focus:border-violet-400/60 focus:ring-2 focus:ring-violet-500/30';
 
   return (
-    <form onSubmit={onSubmit} className="card p-6 sm:p-8">
+    <form onSubmit={onSubmit} className="glass-card p-6 sm:p-8">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="cf-name" className="mb-2 block text-sm font-medium text-white/80">Full Name *</label>
@@ -636,20 +648,20 @@ function ContactForm() {
       <div className="mt-5">
         <label htmlFor="cf-service" className="mb-2 block text-sm font-medium text-white/80">Service Interested In</label>
         <select id="cf-service" name="service" className={inputCls}>
-          <option value="">Select a service…</option>
+          <option value="">Select a service</option>
           {SERVICES.map((s) => <option key={s.title} value={s.title}>{s.title}</option>)}
           <option value="Custom Package">Custom Package</option>
         </select>
       </div>
       <div className="mt-5">
         <label htmlFor="cf-message" className="mb-2 block text-sm font-medium text-white/80">Message *</label>
-        <textarea id="cf-message" name="message" required rows={5} placeholder="Tell us about your brand and growth goals…" className={`${inputCls} resize-none`} />
+        <textarea id="cf-message" name="message" required rows={5} placeholder="Tell us about your brand and growth goals" className={`${inputCls} resize-none`} />
       </div>
       {status === 'error' && (
         <p className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">{errorMsg}</p>
       )}
       <button type="submit" disabled={status === 'loading'} className="btn-primary mt-6 w-full">
-        {status === 'loading' ? <><Loader2 className="h-4 w-4 animate-spin" /> Sending…</> : <>Send Message <ArrowRight className="h-4 w-4" /></>}
+        {status === 'loading' ? <><Loader2 className="h-4 w-4 animate-spin" /> Sending</> : <>Send Message <ArrowRight className="h-4 w-4" /></>}
       </button>
     </form>
   );
@@ -657,10 +669,10 @@ function ContactForm() {
 
 function Contact() {
   const items = [
-    { icon: Mail,       label: 'Email',          value: B.email,           href: `mailto:${B.email}` },
-    { icon: Phone,      label: 'Phone / WhatsApp', value: B.phone,          href: 'tel:+916398202864' },
-    { icon: MapPin,     label: 'Location',        value: B.location,        href: undefined },
-    { icon: Instagram,  label: 'Instagram',       value: B.instagramHandle, href: B.instagram },
+    { icon: Mail,       label: 'Email',            value: B.email,           href: `mailto:${B.email}` },
+    { icon: Phone,      label: 'Phone / WhatsApp',  value: B.phone,          href: 'tel:+916398202864' },
+    { icon: MapPin,     label: 'Location',          value: B.location,        href: undefined },
+    { icon: Instagram,  label: 'Instagram',         value: B.instagramHandle, href: B.instagram },
   ];
 
   return (
@@ -673,7 +685,7 @@ function Contact() {
             <h2 className="mt-5 font-display text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
               Let's build your <span className="text-gradient">viral moment</span>
             </h2>
-            <p className="mt-4 text-white/70">Tell us about your brand. We'll reply within 24 hours with a custom growth plan.</p>
+            <p className="mt-4 text-white/70">Tell us about your brand. We will reply within 24 hours with a custom growth plan.</p>
           </div>
         </Reveal>
 
@@ -682,7 +694,7 @@ function Contact() {
             <div className="flex h-full flex-col gap-4">
               {items.map((it) => {
                 const inner = (
-                  <div className="card flex items-center gap-4 p-5">
+                  <div className="glass-card group flex items-center gap-4 p-5 transition-all duration-300 hover:border-violet-400/40">
                     <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-violet-500/15 text-violet-300 ring-1 ring-violet-400/30 transition-all duration-300 group-hover:bg-violet-500 group-hover:text-white group-hover:shadow-glow">
                       <it.icon className="h-5 w-5" />
                     </span>
@@ -693,9 +705,9 @@ function Contact() {
                   </div>
                 );
                 return it.href ? (
-                  <a key={it.label} href={it.href} target={it.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="group">{inner}</a>
+                  <a key={it.label} href={it.href} target={it.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="block">{inner}</a>
                 ) : (
-                  <div key={it.label} className="group">{inner}</div>
+                  <div key={it.label}>{inner}</div>
                 );
               })}
               <a href={`https://wa.me/${B.whatsapp}`} target="_blank" rel="noreferrer" className="btn-primary mt-2 w-full">
@@ -721,6 +733,7 @@ function Footer() {
       heading: 'Company',
       links: [
         { label: 'Portfolio', href: '#portfolio' },
+        { label: 'Why Us', href: '#why-us' },
         { label: 'Pricing', href: '#pricing' },
         { label: 'Testimonials', href: '#testimonials' },
         { label: 'FAQ', href: '#faq' },
@@ -735,13 +748,13 @@ function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="sm:col-span-2 lg:col-span-1">
             <a href="#home" className="flex items-center gap-2.5 font-display text-xl font-extrabold">
-              <span className="grid h-9 w-9 place-items-center rounded-xl bg-violet-500 shadow-glow">
+              <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-violet-500 to-violet-700 shadow-glow">
                 <Sparkles className="h-5 w-5 text-white" />
               </span>
               <span className="glow-text">ViralNova</span>
             </a>
-            <p className="mt-4 text-sm text-white/60 leading-relaxed">
-              Scale your brand. Dominate social media. Results-driven agency based in {B.location}.
+            <p className="mt-4 text-sm leading-relaxed text-white/60">
+              Scale your brand. Dominate social media. AI-powered digital marketing agency based in {B.location}.
             </p>
             <div className="mt-5 flex gap-3">
               {[
@@ -782,7 +795,7 @@ function Footer() {
         </div>
 
         <div className="mt-12 border-t border-white/10 pt-6 text-center text-xs text-white/40">
-          © {new Date().getFullYear()} {B.name}. All rights reserved. · Bijnor, Uttar Pradesh, India
+          (c) {new Date().getFullYear()} {B.name}. All rights reserved. Built with AI-powered growth in Bijnor, Uttar Pradesh, India
         </div>
       </div>
     </footer>
@@ -818,9 +831,10 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
+        <LogoMarquee />
         <Services />
-        <BeforeAfterSlider />
         <Portfolio />
+        <WhyChooseUs />
         <Testimonials />
         <Pricing />
         <FAQ />

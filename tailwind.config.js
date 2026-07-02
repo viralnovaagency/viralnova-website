@@ -7,9 +7,13 @@ export default {
         ink: {
           950: '#06060a',
           900: '#0a0a0f',
+          850: '#0e0e16',
           800: '#111119',
+          750: '#15151f',
           700: '#1a1a26',
+          650: '#20202e',
           600: '#262636',
+          500: '#34344a',
         },
         violet: {
           50: '#f4f0ff',
@@ -23,6 +27,26 @@ export default {
           800: '#4c1d95',
           900: '#2e1065',
         },
+        accent: {
+          400: '#22d3ee',
+          500: '#06b6d4',
+          600: '#0891b2',
+        },
+        success: {
+          400: '#4ade80',
+          500: '#22c55e',
+          600: '#16a34a',
+        },
+        warning: {
+          400: '#fbbf24',
+          500: '#f59e0b',
+          600: '#d97706',
+        },
+        error: {
+          400: '#f87171',
+          500: '#ef4444',
+          600: '#dc2626',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -33,6 +57,7 @@ export default {
         glow: '0 0 40px -8px rgba(124, 58, 237, 0.6)',
         'glow-lg': '0 0 60px -10px rgba(124, 58, 237, 0.7)',
         'glow-xl': '0 0 80px -12px rgba(124, 58, 237, 0.8)',
+        'glow-accent': '0 0 40px -8px rgba(34, 211, 238, 0.5)',
       },
       keyframes: {
         'fade-up': {
@@ -43,7 +68,7 @@ export default {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
-        'float': {
+        float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-12px)' },
         },
@@ -55,9 +80,13 @@ export default {
           '0%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
-        'shimmer': {
+        shimmer: {
           '0%': { backgroundPosition: '-200% 0' },
           '100%': { backgroundPosition: '200% 0' },
+        },
+        'scale-in': {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
         },
       },
       animation: {
@@ -67,6 +96,7 @@ export default {
         'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
         'spin-slow': 'spin-slow 18s linear infinite',
         shimmer: 'shimmer 3s linear infinite',
+        'scale-in': 'scale-in 0.5s ease-out forwards',
       },
     },
   },
