@@ -599,6 +599,7 @@ function ContactForm() {
     const service = String(fd.get('service') || '').trim();
     const message = String(fd.get('message') || '').trim();
     if (!name || !email || !message) { setStatus('error'); setErrorMsg('Please fill in all required fields.'); return; }
+    if (!supabase) { setStatus('error'); setErrorMsg('Form is not configured. Please email us directly.'); return; }
     const { error } = await supabase.from('contact_submissions').insert({ name, email, message: `[${service || 'General'}] ${message}` });
     if (error) { setStatus('error'); setErrorMsg('Something went wrong. Please email us directly.'); return; }
     setStatus('success');
