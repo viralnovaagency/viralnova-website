@@ -9,12 +9,13 @@
   body {
     @apply bg-ink-950 text-white font-sans antialiased;
     background-image:
-      radial-gradient(60% 50% at 50% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 60%),
-      radial-gradient(40% 40% at 100% 100%, rgba(109, 40, 217, 0.08) 0%, transparent 60%);
+      radial-gradient(50% 40% at 20% 0%, rgba(124, 58, 237, 0.12) 0%, transparent 60%),
+      radial-gradient(40% 35% at 80% 10%, rgba(59, 130, 246, 0.10) 0%, transparent 60%),
+      radial-gradient(35% 30% at 50% 100%, rgba(124, 58, 237, 0.08) 0%, transparent 60%);
     background-attachment: fixed;
   }
   ::selection {
-    @apply bg-violet-500/40 text-white;
+    @apply bg-neon-500/40 text-white;
   }
 }
 
@@ -24,18 +25,22 @@
   }
 
   .btn-primary {
-    @apply relative inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-violet-600 px-7 py-3.5 text-sm font-semibold text-white shadow-glow transition-all duration-300 hover:from-violet-400 hover:to-violet-500 hover:shadow-glow-lg hover:-translate-y-0.5 active:translate-y-0;
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-neon-500 via-neon-500 to-electric-500 px-7 py-3.5 text-sm font-semibold text-white shadow-glow-mix transition-all duration-300 hover:shadow-glow-mix-lg hover:-translate-y-0.5 active:translate-y-0;
+    background-size: 200% 100%;
+  }
+  .btn-primary:hover {
+    background-position: 100% 50%;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition-all duration-300 hover:border-violet-400/60 hover:bg-violet-500/10 hover:-translate-y-0.5;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition-all duration-300 hover:border-neon-400/60 hover:bg-neon-500/10 hover:-translate-y-0.5;
   }
 
   .card {
-    @apply relative overflow-hidden rounded-2xl border border-white/10 bg-ink-800/60 backdrop-blur-sm transition-all duration-300;
+    @apply relative overflow-hidden rounded-2xl border border-white/10 bg-ink-800/50 backdrop-blur-sm transition-all duration-300;
   }
   .card:hover {
-    @apply border-violet-400/40 -translate-y-1;
+    @apply border-neon-400/40 -translate-y-1;
   }
 
   .glass-nav {
@@ -43,29 +48,25 @@
   }
 
   .glow-text {
-    text-shadow: 0 0 30px rgba(155, 109, 255, 0.55);
+    text-shadow: 0 0 30px rgba(167, 139, 250, 0.6), 0 0 60px rgba(96, 165, 250, 0.3);
   }
 
   .section-eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-violet-400/30 bg-violet-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-violet-200;
+    @apply inline-flex items-center gap-2 rounded-full border border-neon-400/30 bg-neon-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-neon-200;
   }
 }
 
 @layer utilities {
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
   .text-gradient {
-    @apply bg-gradient-to-r from-violet-200 via-violet-400 to-violet-300 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-neon-300 via-neon-400 to-electric-400 bg-clip-text text-transparent;
   }
-  .text-gradient-warm {
-    @apply bg-gradient-to-r from-amber-200 via-violet-300 to-violet-400 bg-clip-text text-transparent;
+  .text-gradient-blue {
+    @apply bg-gradient-to-r from-electric-300 via-electric-400 to-neon-400 bg-clip-text text-transparent;
+  }
+  .text-gradient-mix {
+    @apply bg-gradient-to-r from-neon-300 via-electric-400 to-neon-300 bg-clip-text text-transparent;
+    background-size: 200% 100%;
+    animation: gradient-shift 6s ease-in-out infinite;
   }
   .bg-grid {
     background-image:
@@ -97,7 +98,7 @@
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.5), transparent 40%, transparent 60%, rgba(124, 58, 237, 0.3));
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.5), rgba(59, 130, 246, 0.3) 50%, transparent 70%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -111,7 +112,7 @@
 
 /* Select dark styling */
 select option {
-  background-color: #1a1a26;
+  background-color: #181826;
   color: #fff;
 }
 
@@ -119,12 +120,12 @@ select option {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #06060a;
+  background: #050507;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #7c3aed, #4c1d95);
+  background: linear-gradient(180deg, #7c3aed, #3b82f6);
   border-radius: 999px;
-  border: 2px solid #06060a;
+  border: 2px solid #050507;
 }
 
 /* Marquee animation */
@@ -143,4 +144,9 @@ select option {
 }
 .animate-orb {
   animation: orb-pulse 8s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
